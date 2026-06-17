@@ -1,0 +1,59 @@
+public class Queue{
+    private QueueNode front;
+    private QueueNode rear;
+    private int size=0;
+    public Queue(){
+        this.front=null;
+        this.rear=null;
+        this.size=0;
+    }
+    public void enqueue(int data){
+        QueueNode newNode=new QueueNode(data);
+        if(isEmpty()    ){
+            front=newNode;
+            rear=newNode;
+        }else{
+            rear.next=newNode;
+            rear=newNode;
+        }
+        size++;
+    }
+    public int dequeue()throws IllegalStateException{
+        if(isEmpty()){
+            throw new IllegalStateException("Queue is empty");
+        }else{
+            int data=front.data;
+            front=front.next;
+            if(front==null){
+                rear=null;
+            }
+            size--;
+            return data;
+        }
+    }
+    public boolean isEmpty(){
+        return front==null;
+    }
+    public int peek()throws IllegalStateException{
+        if(isEmpty()){
+            throw new IllegalStateException("Queue is empty");
+        }else{
+            return front.data;
+        }
+    }
+    public int size(){
+        return size;
+    }
+    public void display(){
+        if(isEmpty()){
+            System.out.println("Queue is empty");
+        }else{
+            QueueNode current=front;
+            while(current!=null){
+                System.out.print(current.data+" ");
+                current=current.next;
+            }
+            System.out.println();
+        }
+    }
+}
